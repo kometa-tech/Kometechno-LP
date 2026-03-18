@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>コメタ | 生成AI×エンジニアの開発サポート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-dark: #0f3460;
+  --blue-mid: #1a5fa8;
+  --blue-light: #3a8fd6;
+  --blue-pale: #e6f1fb;
+  --blue-accent: #0ea5e9;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-500: #64748b;
+  --gray-700: #334155;
+  --gray-900: #0f172a;
+  --green: #10b981;
+  --font-sans: 'DM Sans', 'Noto Sans JP', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-sans); color: var(--gray-900); background: var(--white); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 16px 40px; display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gray-200);
+}
+.nav-logo { font-size: 18px; font-weight: 700; color: var(--blue-dark); letter-spacing: -0.02em; }
+.nav-logo span { color: var(--blue-accent); }
+.nav-cta {
+  background: var(--blue-mid); color: white; font-size: 13px; font-weight: 500;
+  padding: 8px 20px; border-radius: 8px; text-decoration: none; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--blue-dark); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 50%, #f0f9ff 100%);
+  padding: 100px 40px 60px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -200px; right: -200px;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(14,165,233,0.08) 0%, transparent 70%);
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -100px; left: -100px;
+  width: 400px; height: 400px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,95,168,0.06) 0%, transparent 70%);
+}
+.hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center; position: relative; z-index: 1; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--blue-pale); color: var(--blue-mid); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 20px; margin-bottom: 20px; }
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-accent); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(1.3)} }
+.hero h1 { font-size: clamp(28px, 4vw, 46px); font-weight: 700; line-height: 1.3; color: var(--gray-900); letter-spacing: -0.02em; margin-bottom: 16px; }
+.hero h1 em { font-style: normal; color: var(--blue-mid); }
+.hero-sub { font-size: 15px; color: var(--gray-500); line-height: 1.8; margin-bottom: 36px; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--blue-mid); color: white; font-size: 14px; font-weight: 500;
+  padding: 14px 28px; border-radius: 10px; text-decoration: none; transition: all 0.2s;
+  box-shadow: 0 4px 14px rgba(26,95,168,0.25);
+}
+.btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,95,168,0.35); }
+.btn-secondary {
+  background: white; color: var(--blue-mid); font-size: 14px; font-weight: 500;
+  padding: 13px 28px; border-radius: 10px; text-decoration: none;
+  border: 1.5px solid var(--blue-light); transition: all 0.2s;
+}
+.btn-secondary:hover { background: var(--blue-pale); }
+.hero-card {
+  background: white; border-radius: 20px; padding: 28px;
+  box-shadow: 0 20px 60px rgba(15,52,96,0.1); border: 1px solid var(--gray-200);
+}
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+.stat { text-align: center; }
+.stat-num { font-size: 22px; font-weight: 700; color: var(--blue-mid); }
+.stat-label { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+.hero-card-name { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200); }
+.avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: var(--blue-mid); flex-shrink: 0; }
+.hero-card-name-text { font-size: 15px; font-weight: 700; color: var(--gray-900); }
+.hero-card-name-sub { font-size: 11px; color: var(--gray-500); }
+.skills-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-tag { font-size: 11px; background: var(--blue-pale); color: var(--blue-dark); padding: 3px 9px; border-radius: 4px; }
+.skill-tag.ai { background: #dbeafe; color: #1e40af; }
+
+/* SECTION BASE */
+section { padding: 80px 40px; }
+.section-inner { max-width: 1100px; margin: 0 auto; }
+.section-label { font-size: 12px; font-weight: 500; color: var(--blue-mid); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.section-title { font-size: clamp(22px, 3vw, 32px); font-weight: 700; color: var(--gray-900); letter-spacing: -0.02em; margin-bottom: 12px; }
+.section-sub { font-size: 14px; color: var(--gray-500); line-height: 1.8; margin-bottom: 48px; }
+
+/* PROFILE */
+.profile-sec { background: var(--gray-50); }
+.profile-grid { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start; }
+.profile-left { background: white; border-radius: 16px; padding: 28px; border: 1px solid var(--gray-200); text-align: center; }
+.profile-avatar { width: 88px; height: 88px; border-radius: 50%; background: var(--blue-pale); border: 3px solid var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; color: var(--blue-mid); margin: 0 auto 14px; }
+.profile-name { font-size: 20px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+.profile-title { font-size: 12px; color: var(--gray-500); margin-bottom: 20px; }
+.profile-stats { display: grid; gap: 10px; }
+.profile-stat { display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: var(--gray-50); border-radius: 8px; }
+.profile-stat-label { font-size: 11px; color: var(--gray-500); }
+.profile-stat-val { font-size: 13px; font-weight: 700; color: var(--blue-mid); }
+.profile-right h3 { font-size: 18px; font-weight: 700; color: var(--gray-900); margin-bottom: 16px; }
+.profile-text { font-size: 14px; color: var(--gray-700); line-height: 2; margin-bottom: 28px; }
+.profile-skills-title { font-size: 12px; font-weight: 500; color: var(--gray-500); margin-bottom: 10px; letter-spacing: 0.06em; text-transform: uppercase; }
+.profile-skills { display: flex; flex-wrap: wrap; gap: 6px; }
+.ps-tag { font-size: 12px; padding: 4px 11px; border-radius: 5px; }
+.ps-main { background: var(--blue-mid); color: white; }
+.ps-sub { background: #dbeafe; color: #1e40af; }
+.ps-ai { background: #ede9fe; color: #5b21b6; }
+
+/* PROBLEMS */
+.problems-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 36px; }
+.problem-card { background: white; border: 1px solid var(--gray-200); border-radius: 14px; padding: 20px; display: flex; gap: 14px; align-items: flex-start; transition: box-shadow 0.2s, transform 0.2s; }
+.problem-card:hover { box-shadow: 0 8px 24px rgba(15,52,96,0.1); transform: translateY(-2px); }
+.problem-num { width: 32px; height: 32px; border-radius: 50%; background: var(--blue-pale); color: var(--blue-mid); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.problem-title { font-size: 13px; font-weight: 700; color: var(--gray-900); margin-bottom: 5px; }
+.problem-desc { font-size: 12px; color: var(--gray-500); line-height: 1.7; }
+.problem-cta { background: var(--blue-mid); border-radius: 14px; padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.problem-cta-text { font-size: 15px; font-weight: 700; color: white; }
+.problem-cta-sub { font-size: 12px; color: rgba(255,255,255,0.75); margin-top: 4px; }
+
+/* REASONS */
+.reasons-sec { background: var(--gray-50); }
+.reasons-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.reason-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--gray-200); border-left: 4px solid var(--blue-mid); transition: box-shadow 0.2s; }
+.reason-card:hover { box-shadow: 0 8px 24px rgba(15,52,96,0.08); }
+.reason-num { font-size: 11px; font-weight: 700; color: var(--blue-mid); letter-spacing: 0.08em; margin-bottom: 8px; }
+.reason-title { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 10px; }
+.reason-text { font-size: 13px; color: var(--gray-500); line-height: 1.8; }
+
+/* SERVICES */
+.services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.service-card { background: white; border: 1px solid var(--gray-200); border-radius: 16px; padding: 24px; transition: all 0.2s; }
+.service-card:hover { border-color: var(--blue-light); box-shadow: 0 8px 28px rgba(26,95,168,0.1); transform: translateY(-2px); }
+.service-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
+.service-badge { display: inline-block; font-size: 11px; background: #f1f5f9; color: var(--gray-500); padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; }
+.service-name { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 8px; }
+.service-desc { font-size: 12px; color: var(--gray-500); line-height: 1.7; margin-bottom: 14px; }
+.service-price { font-size: 13px; font-weight: 700; color: var(--blue-mid); }
+.service-note { font-size: 11px; color: var(--gray-500); margin-top: 3px; }
+.services-note { margin-top: 20px; text-align: center; font-size: 13px; color: var(--gray-500); background: var(--blue-pale); border-radius: 10px; padding: 14px; }
+
+/* PORTFOLIO */
+.portfolio-sec { background: var(--gray-50); }
+.portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.portfolio-card { background: white; border-radius: 16px; overflow: hidden; border: 1px solid var(--gray-200); transition: box-shadow 0.2s; }
+.portfolio-card:hover { box-shadow: 0 8px 28px rgba(15,52,96,0.1); }
+.portfolio-img { height: 140px; background: linear-gradient(135deg, var(--blue-pale) 0%, #dbeafe 100%); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative; }
+.portfolio-badge { position: absolute; top: 10px; right: 10px; font-size: 10px; background: white; color: var(--gray-500); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--gray-200); }
+.portfolio-body { padding: 18px; }
+.portfolio-name { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
+.portfolio-desc { font-size: 12px; color: var(--gray-500); line-height: 1.7; margin-bottom: 12px; }
+.portfolio-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.pt { font-size: 10px; background: var(--blue-pale); color: var(--blue-dark); padding: 2px 7px; border-radius: 3px; }
+
+/* PRICING */
+.pricing-table { width: 100%; border-collapse: collapse; border-radius: 14px; overflow: hidden; border: 1px solid var(--gray-200); margin-bottom: 20px; }
+.pricing-table th { background: var(--blue-mid); color: white; padding: 14px 18px; text-align: left; font-size: 13px; font-weight: 500; }
+.pricing-table td { padding: 14px 18px; font-size: 13px; border-bottom: 1px solid var(--gray-200); }
+.pricing-table tr:last-child td { border-bottom: none; }
+.pricing-table tr:nth-child(even) td { background: var(--gray-50); }
+.price-val { font-weight: 700; color: var(--blue-mid); }
+.pricing-notes { display: grid; gap: 8px; }
+.pricing-note { display: flex; gap: 10px; align-items: flex-start; background: var(--gray-50); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: var(--gray-500); line-height: 1.7; }
+.pricing-note::before { content: '•'; color: var(--blue-mid); font-size: 16px; flex-shrink: 0; margin-top: -2px; }
+
+/* FAQ */
+.faq-sec { background: var(--gray-50); }
+.faq-list { display: grid; gap: 12px; }
+.faq-item { background: white; border-radius: 14px; overflow: hidden; border: 1px solid var(--gray-200); }
+.faq-q { display: flex; gap: 12px; align-items: flex-start; padding: 16px 20px; background: var(--blue-pale); }
+.faq-q-label { font-size: 14px; font-weight: 700; color: var(--blue-mid); flex-shrink: 0; }
+.faq-q-text { font-size: 13px; font-weight: 500; color: var(--blue-dark); line-height: 1.6; }
+.faq-a { display: flex; gap: 12px; align-items: flex-start; padding: 16px 20px; }
+.faq-a-label { font-size: 14px; font-weight: 700; color: var(--blue-light); flex-shrink: 0; }
+.faq-a-text { font-size: 13px; color: var(--gray-500); line-height: 1.8; }
+
+/* CTA FINAL */
+.cta-sec { background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 100%); }
+.cta-sec .section-label { color: rgba(255,255,255,0.6); }
+.cta-sec .section-title { color: white; }
+.cta-sec .section-sub { color: rgba(255,255,255,0.7); }
+.cta-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
+.cta-card { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 14px; padding: 20px; text-align: center; }
+.cta-card-num { font-size: 24px; font-weight: 700; color: white; margin-bottom: 4px; }
+.cta-card-label { font-size: 12px; color: rgba(255,255,255,0.7); }
+.cta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.btn-white { background: white; color: var(--blue-mid); font-size: 15px; font-weight: 700; padding: 16px 36px; border-radius: 12px; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+.btn-outline-white { background: transparent; color: white; font-size: 15px; font-weight: 500; padding: 15px 36px; border-radius: 12px; text-decoration: none; border: 2px solid rgba(255,255,255,0.5); transition: all 0.2s; }
+.btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: white; }
+.cta-note { text-align: center; margin-top: 20px; font-size: 12px; color: rgba(255,255,255,0.55); }
+
+/* FOOTER */
+footer { background: var(--gray-900); color: rgba(255,255,255,0.5); padding: 28px 40px; text-align: center; font-size: 12px; }
+footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  nav { padding: 14px 20px; }
+  section { padding: 60px 20px; }
+  .hero { padding: 90px 20px 50px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 36px; }
+  .hero-card { display: none; }
+  .profile-grid { grid-template-columns: 1fr; }
+  .reasons-grid { grid-template-columns: 1fr; }
+  .cta-cards { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .pricing-table { font-size: 12px; }
+  .pricing-table th, .pricing-table td { padding: 10px 12px; }
+}
+
+/* FADE IN ANIMATION */
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">コメタ<span>.</span></div>
+  <a href="#contact" class="nav-cta">無料で相談する</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="fade-in">
+      <div class="hero-badge">生成AI × エンジニア</div>
+      <h1>速く、安く、丁寧に。<br><em>生成AI×エンジニアが、</em><br>あなたの開発を全力サポート。</h1>
+      <p class="hero-sub">LP制作・Webサイト開発・アプリ・システム開発まで、<br>最新の生成AIと確かな技術力でスピーディーにお届けします。<br>まずはお気軽にご相談ください。</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">まずは無料で相談する</a>
+        <a href="https://crowdworks.jp" target="_blank" class="btn-secondary">クラウドワークスで依頼する</a>
+      </div>
+    </div>
+    <div class="hero-card fade-in" style="animation-delay:0.2s">
+      <div class="hero-card-name">
+        <div class="avatar">コ</div>
+        <div>
+          <div class="hero-card-name-text">コメタ</div>
+          <div class="hero-card-name-sub">フリーランスエンジニア / 個人事業主</div>
+        </div>
+      </div>
+      <div class="skills-wrap" style="margin-bottom:20px;">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Webスクレイピング</span>
+        <span class="skill-tag">業務自動化</span>
+        <span class="skill-tag">LINE BOT</span>
+        <span class="skill-tag">GAS</span>
+        <span class="skill-tag">Chrome拡張</span>
+        <span class="skill-tag">LP・Web制作</span>
+        <span class="skill-tag ai">生成AI活用</span>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">4年+</div><div class="stat-label">IT実務経験</div></div>
+        <div class="stat"><div class="stat-num">20h</div><div class="stat-label">週最大稼働</div></div>
+        <div class="stat"><div class="stat-num">24h</div><div class="stat-label">返信目安</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section class="profile-sec" id="profile">
+  <div class="section-inner">
+    <div class="section-label fade-in">Profile</div>
+    <h2 class="section-title fade-in">プロフィール</h2>
+    <div class="profile-grid fade-in">
+      <div class="profile-left">
+        <div class="profile-avatar">コ</div>
+        <div class="profile-name">コメタ</div>
+        <div class="profile-title">フリーランスエンジニア / 個人事業主</div>
+        <div class="profile-stats">
+          <div class="profile-stat"><span class="profile-stat-label">IT実務経験</span><span class="profile-stat-val">4年+</span></div>
+          <div class="profile-stat"><span class="profile-stat-label">週最大稼働</span><span class="profile-stat-val">20時間</span></div>
+          <div class="profile-stat"><span class="profile-stat-label">返信スピード</span><span class="profile-stat-val">24時間以内</span></div>
+          <div class="profile-stat"><span class="profile-stat-label">開業</span><span class="profile-stat-val">2026年2月</span></div>
+        </div>
+      </div>
+      <div class="profile-right">
+        <h3>はじめまして、コメタと申します。</h3>
+        <p class="profile-text">本業ではシステム開発エンジニアとして4年のIT実務経験を持ち、その技術力を活かして2026年2月より個人事業主として活動を開始しました。<br><br>LP・Webサイト制作からアプリ・システム開発まで、開発全般をひとりで担当します。Pythonを使った業務自動化・Webスクレイピングを得意とするほか、生成AI開発スクールにてChrome拡張機能開発・API連携・データ分析・LINE BOT・GASなど幅広い開発を実践しています。<br><br>最新の生成AI技術を開発に積極的に活用することで、スピードと品質を両立したアウトプットをお届けします。こまめな進捗共有と丁寧なコミュニケーションを徹底しており、小さな疑問でも気軽に聞いていただける関係を大切にしています。</p>
+        <div class="profile-skills-title">スキル・得意技術</div>
+        <div class="profile-skills">
+          <span class="ps-tag ps-main">Python</span>
+          <span class="ps-tag ps-main">Webスクレイピング</span>
+          <span class="ps-tag ps-main">業務自動化</span>
+          <span class="ps-tag ps-sub">Chrome拡張機能</span>
+          <span class="ps-tag ps-sub">API連携</span>
+          <span class="ps-tag ps-sub">LINE BOT</span>
+          <span class="ps-tag ps-sub">GAS</span>
+          <span class="ps-tag ps-sub">データ分析</span>
+          <span class="ps-tag ps-sub">LP・Web制作</span>
+          <span class="ps-tag ps-ai">生成AI活用開発</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMS -->
+<section id="problems">
+  <div class="section-inner">
+    <div class="section-label fade-in">Problems</div>
+    <h2 class="section-title fade-in">こんなお悩みはありませんか？</h2>
+    <div class="problems-grid">
+      <div class="problem-card fade-in">
+        <div class="problem-num">1</div>
+        <div><div class="problem-title">制作会社に頼むと高すぎる…</div><div class="problem-desc">見積もりを取ったら予算オーバー。でもクオリティは妥協したくない。</div></div>
+      </div>
+      <div class="problem-card fade-in">
+        <div class="problem-num">2</div>
+        <div><div class="problem-title">進捗が見えなくて不安…</div><div class="problem-desc">連絡しても返信が遅い。今どこまで進んでいるのかわからない。</div></div>
+      </div>
+      <div class="problem-card fade-in">
+        <div class="problem-num">3</div>
+        <div><div class="problem-title">どこに頼めばいいかわからない…</div><div class="problem-desc">LP・アプリ・自動化と依頼したいものが複数あるが、窓口がバラバラになりそう。</div></div>
+      </div>
+      <div class="problem-card fade-in">
+        <div class="problem-num">4</div>
+        <div><div class="problem-title">技術的なことが相談しにくい…</div><div class="problem-desc">専門用語ばかりで話についていけない。素人でも気軽に話せる人を探している。</div></div>
+      </div>
+      <div class="problem-card fade-in">
+        <div class="problem-num">5</div>
+        <div><div class="problem-title">繰り返し作業に毎日時間を取られている…</div><div class="problem-desc">手作業でできるけど量が多くて大変。自動化したいが何から始めればいいかわからない。</div></div>
+      </div>
+    </div>
+    <div class="problem-cta fade-in">
+      <div><div class="problem-cta-text">その悩み、コメタが解決します。</div><div class="problem-cta-sub">LP制作・Web開発・自動化・LINE BOTまで、生成AIと4年のエンジニア経験でお応えします。</div></div>
+      <a href="#contact" class="btn-white" style="font-size:13px;padding:10px 22px;">無料で相談する</a>
+    </div>
+  </div>
+</section>
+
+<!-- REASONS -->
+<section class="reasons-sec" id="reasons">
+  <div class="section-inner">
+    <div class="section-label fade-in">Why Choose</div>
+    <h2 class="section-title fade-in">コメタが選ばれる4つの理由</h2>
+    <div class="reasons-grid">
+      <div class="reason-card fade-in">
+        <div class="reason-num">REASON 01</div>
+        <div class="reason-title">生成AIを活用したスピード×品質の開発</div>
+        <div class="reason-text">最新の生成AI技術を開発プロセスに積極的に取り入れています。従来より短い納期・低いコストで高品質な成果物を実現。「早く仕上げてほしいけどクオリティも妥協したくない」というご要望にお応えできます。</div>
+      </div>
+      <div class="reason-card fade-in">
+        <div class="reason-num">REASON 02</div>
+        <div class="reason-title">本業4年のエンジニア経験に裏打ちされた技術力</div>
+        <div class="reason-text">本業のシステム開発で培った実務経験をそのまま活かします。LP・Web制作はもちろん、Python自動化・Chrome拡張・LINE BOT・GASなど幅広い開発に対応。まとめて頼みたいニーズにもワンストップでお応えします。</div>
+      </div>
+      <div class="reason-card fade-in">
+        <div class="reason-num">REASON 03</div>
+        <div class="reason-title">丁寧な報連相で、依頼中の不安をゼロに</div>
+        <div class="reason-text">「進捗が見えない」「返信が遅い」といった不安を感じさせないよう、こまめな進捗報告と迅速なレスポンス（基本24時間以内）を徹底。専門用語を使わずわかりやすく説明するので、IT知識がなくても安心してお任せいただけます。</div>
+      </div>
+      <div class="reason-card fade-in">
+        <div class="reason-num">REASON 04</div>
+        <div class="reason-title">要件定義から納品まですべて一人で一貫対応</div>
+        <div class="reason-text">ヒアリング・設計・開発・テスト・納品まですべてコメタが担当します。複数担当者への伝言ゲームや認識のズレが起きません。「気軽に相談できて、そのまま依頼できる」スムーズな体験を提供します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-label fade-in">Services</div>
+    <h2 class="section-title fade-in">提供サービス一覧</h2>
+    <p class="section-sub fade-in">LP制作からアプリ開発・業務自動化まで、幅広いご依頼に対応しています。</p>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon">🖥️</div>
+        <div class="service-badge">集客・販促</div>
+        <div class="service-name">LP・ランディングページ制作</div>
+        <div class="service-desc">商品・サービスの魅力を伝え、問い合わせ・購入につなげるLPを制作します。デザインからコーディングまで一貫対応。</div>
+        <div class="service-price">5〜20万円</div>
+        <div class="service-note">納期目安：7〜21日</div>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🌐</div>
+        <div class="service-badge">コーポレート・ポートフォリオ</div>
+        <div class="service-name">Webサイト開発</div>
+        <div class="service-desc">コーポレートサイト・ポートフォリオ・サービスサイトを制作。レスポンシブ対応・SEOを意識した設計でお届けします。</div>
+        <div class="service-price">10〜30万円</div>
+        <div class="service-note">納期目安：14〜30日</div>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">⚙️</div>
+        <div class="service-badge">Python・GAS・スクレイピング</div>
+        <div class="service-name">業務自動化・ツール開発</div>
+        <div class="service-desc">Pythonや GASを使った業務自動化・Webスクレイピングを開発。毎日の手作業をなくし、作業時間の大幅削減をサポートします。</div>
+        <div class="service-price">3〜15万円</div>
+        <div class="service-note">納期目安：7〜21日</div>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🤖</div>
+        <div class="service-badge">自動応答・顧客対応</div>
+        <div class="service-name">LINE BOT開発</div>
+        <div class="service-desc">LINEを使った自動応答BOT・予約受付・FAQ対応ツールを開発。24時間自動で対応できる仕組みをつくります。</div>
+        <div class="service-price">5〜20万円</div>
+        <div class="service-note">納期目安：14〜21日</div>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon">🧩</div>
+        <div class="service-badge">ブラウザ拡張・データ活用</div>
+        <div class="service-name">Chrome拡張・API連携開発</div>
+        <div class="service-desc">Chrome拡張機能の開発や外部APIとの連携を実装。ブラウザ操作の自動化・複数サービスのデータ連携・可視化まで対応。</div>
+        <div class="service-price">5〜20万円</div>
+        <div class="service-note">納期目安：14〜28日</div>
+      </div>
+    </div>
+    <p class="services-note fade-in">📌 上記以外のご依頼もお気軽にご相談ください。要件をお聞きした上で対応可否をお伝えします。</p>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio-sec" id="portfolio">
+  <div class="section-inner">
+    <div class="section-label fade-in">Portfolio</div>
+    <h2 class="section-title fade-in">制作実績・ポートフォリオ</h2>
+    <p class="section-sub fade-in">生成AI開発スクールでの制作物を中心に掲載しています。受注案件が増え次第、随時更新していきます。</p>
+    <div class="portfolio-grid">
+      <div class="portfolio-card fade-in">
+        <div class="portfolio-img">🧩<span class="portfolio-badge">スクール制作</span></div>
+        <div class="portfolio-body">
+          <div class="portfolio-name">Chrome拡張機能 × API連携 × データ分析</div>
+          <div class="portfolio-desc">Chromeブラウザ上で動作する拡張機能を開発。外部APIと連携してデータを取得・分析し、ブラウザ上に可視化する仕組みを実装しました。</div>
+          <div class="portfolio-tags"><span class="pt">JavaScript</span><span class="pt">Chrome API</span><span class="pt">REST API</span><span class="pt">生成AI活用</span></div>
+        </div>
+      </div>
+      <div class="portfolio-card fade-in">
+        <div class="portfolio-img">🤖<span class="portfolio-badge">スクール制作</span></div>
+        <div class="portfolio-body">
+          <div class="portfolio-name">LINE BOT ― 自動応答・業務効率化ツール</div>
+          <div class="portfolio-desc">LINE Messaging APIを使ったチャットBOTを開発。ユーザーのメッセージに自動応答し、業務効率化・顧客対応の自動化を実現しました。</div>
+          <div class="portfolio-tags"><span class="pt">LINE API</span><span class="pt">Python</span><span class="pt">Webhook</span><span class="pt">生成AI活用</span></div>
+        </div>
+      </div>
+      <div class="portfolio-card fade-in">
+        <div class="portfolio-img">📊<span class="portfolio-badge">スクール制作</span></div>
+        <div class="portfolio-body">
+          <div class="portfolio-name">GAS ― スプレッドシート・業務自動化</div>
+          <div class="portfolio-desc">Google Apps Scriptを使ったスプレッドシート自動化ツールを開発。データの自動集計・メール送信・定期実行などを実装しました。</div>
+          <div class="portfolio-tags"><span class="pt">GAS</span><span class="pt">Google Sheets</span><span class="pt">Gmail API</span><span class="pt">生成AI活用</span></div>
+        </div>
+      </div>
+      <div class="portfolio-card fade-in">
+        <div class="portfolio-img">🖥️<span class="portfolio-badge">自社制作</span></div>
+        <div class="portfolio-body">
+          <div class="portfolio-name">このLP ― フリーランス営業用サイト</div>
+          <div class="portfolio-desc">このサイト自体が制作実績です。HTML・CSS・JavaScriptで構築し、レスポンシブ対応・問い合わせフォーム連携まで一貫して制作しました。</div>
+          <div class="portfolio-tags"><span class="pt">HTML/CSS</span><span class="pt">JavaScript</span><span class="pt">レスポンシブ</span><span class="pt">生成AI活用</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-label fade-in">Pricing</div>
+    <h2 class="section-title fade-in">料金・納期の目安</h2>
+    <p class="section-sub fade-in">すべて税込・要件によって変動します。まずはお気軽にご相談ください。</p>
+    <table class="pricing-table fade-in">
+      <tr><th>サービス</th><th>料金目安</th><th>納期目安</th></tr>
+      <tr><td><strong>LP制作</strong><br><span style="font-size:11px;color:#64748b;">デザイン・コーディング一式</span></td><td class="price-val">5〜20万円</td><td>7〜21日</td></tr>
+      <tr><td><strong>Webサイト開発</strong><br><span style="font-size:11px;color:#64748b;">コーポレート・ポートフォリオ等</span></td><td class="price-val">10〜30万円</td><td>14〜30日</td></tr>
+      <tr><td><strong>業務自動化・ツール開発</strong><br><span style="font-size:11px;color:#64748b;">Python・GAS・スクレイピング</span></td><td class="price-val">3〜15万円</td><td>7〜21日</td></tr>
+      <tr><td><strong>LINE BOT開発</strong><br><span style="font-size:11px;color:#64748b;">自動応答・顧客対応ボット</span></td><td class="price-val">5〜20万円</td><td>14〜21日</td></tr>
+      <tr><td><strong>Chrome拡張・API連携</strong><br><span style="font-size:11px;color:#64748b;">ブラウザ拡張・データ連携</span></td><td class="price-val">5〜20万円</td><td>14〜28日</td></tr>
+      <tr><td><strong>その他・複合案件</strong><br><span style="font-size:11px;color:#64748b;">要件をお聞きして対応可否を確認</span></td><td class="price-val">要相談</td><td>要相談</td></tr>
+    </table>
+    <div class="pricing-notes fade-in">
+      <div class="pricing-note">上記はあくまで目安です。要件の規模・複雑さによって変動します。まずはヒアリングのうえ、正式なお見積もりをご提示します。</div>
+      <div class="pricing-note">修正対応は各サービスにつき2回まで無料で承ります。それ以上の修正は別途ご相談となります。</div>
+      <div class="pricing-note">お支払いはクラウドワークスの仕組みに準じます。着手前のお振込みはお断りしております。</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec" id="faq">
+  <div class="section-inner">
+    <div class="section-label fade-in">FAQ</div>
+    <h2 class="section-title fade-in">よくある質問</h2>
+    <p class="section-sub fade-in">お問い合わせ前にご確認ください。解決しない場合はお気軽にご連絡ください。</p>
+    <div class="faq-list">
+      <div class="faq-item fade-in">
+        <div class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">副業のエンジニアということで、品質や対応に不安があります。</span></div>
+        <div class="faq-a"><span class="faq-a-label">A.</span><span class="faq-a-text">本業でシステム開発エンジニアとして4年の実務経験があり、業務品質・納期管理には慣れています。副業だからといって対応が雑になることはありません。進捗報告・レスポンス（24時間以内）を徹底し、安心してお任せいただける環境を整えています。</span></div>
+      </div>
+      <div class="faq-item fade-in">
+        <div class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">IT知識がなくても相談・依頼できますか？</span></div>
+        <div class="faq-a"><span class="faq-a-label">A.</span><span class="faq-a-text">はい、まったく問題ありません。「こんなものを作りたい」というイメージだけお伝えいただければ大丈夫です。専門用語を使わずわかりやすくご説明し、要件を整理するところからサポートします。</span></div>
+      </div>
+      <div class="faq-item fade-in">
+        <div class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">急ぎの案件でも対応できますか？</span></div>
+        <div class="faq-a"><span class="faq-a-label">A.</span><span class="faq-a-text">ご依頼内容と現在の稼働状況によりますが、可能な限り対応します。生成AIを活用した開発フローにより、通常より短い納期でのご対応ができるケースもあります。まずはご希望の納期をお知らせください。</span></div>
+      </div>
+      <div class="faq-item fade-in">
+        <div class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">依頼後に内容を変更・追加することはできますか？</span></div>
+        <div class="faq-a"><span class="faq-a-label">A.</span><span class="faq-a-text">着手前であれば変更可能です。開発中・完成後の追加変更は、内容によって別途お見積もりとなる場合があります。認識のズレを防ぐため、着手前に要件を丁寧にすり合わせるよう心がけています。</span></div>
+      </div>
+      <div class="faq-item fade-in">
+        <div class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">まず相談だけしたいのですが大丈夫ですか？</span></div>
+        <div class="faq-a"><span class="faq-a-label">A.</span><span class="faq-a-text">もちろんです！「まだ依頼するか決めていない」「予算感を確認したいだけ」という段階でも大歓迎です。相談・お見積もりは無料ですので、お気軽にご連絡ください。</span></div>
+      </div>
+      <div class="faq-item fade-in">
+        <div class="faq-q"><span class="faq-q-label">Q.</span><span class="faq-q-text">納品後のサポート・保守対応はありますか？</span></div>
+        <div class="faq-a"><span class="faq-a-label">A.</span><span class="faq-a-text">納品後1週間は無償でサポートします。それ以降の保守・追加開発は別途ご相談ください。継続してお付き合いいただけるよう、柔軟に対応しています。</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-sec" id="contact">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-label fade-in">Contact</div>
+    <h2 class="section-title fade-in">まずはお気軽にご相談ください</h2>
+    <p class="section-sub fade-in">「ちょっと聞いてみたい」その一歩が、ビジネスを変えるかもしれません。<br>依頼するかどうかまだ決まっていなくてもOKです。</p>
+    <div class="cta-cards fade-in">
+      <div class="cta-card"><div class="cta-card-num">無料</div><div class="cta-card-label">相談・見積もり</div></div>
+      <div class="cta-card"><div class="cta-card-num">24h</div><div class="cta-card-label">返信スピード</div></div>
+      <div class="cta-card"><div class="cta-card-num">契約後</div><div class="cta-card-label">お支払い</div></div>
+    </div>
+    <div class="cta-btns fade-in">
+      <a href="https://forms.gle/TYQ6gQzatQVmD4EY6" target="_blank" class="btn-white">まずは無料で相談する</a>
+      <a href="https://crowdworks.jp/public/employees/4738593?ref=login_header" target="_blank" class="btn-outline-white">クラウドワークスで依頼する</a>
+    </div>
+    <p class="cta-note fade-in">※ 「まずは無料で相談する」ボタンはGoogleフォームのURLに変更してください</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span>コメタ</span>　|　個人事業主・フリーランスエンジニア</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
