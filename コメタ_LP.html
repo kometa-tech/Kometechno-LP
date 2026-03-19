@@ -4,6 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>コメタ | 生成AI×エンジニアの開発サポート</title>
+<meta name="description" content="LP制作・Webサイト開発・業務自動化・LINE BOTまで、生成AIと4年のエンジニア実務経験でスピーディーにお届けします。相談・見積もり無料。">
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="コメタ | 生成AI×エンジニアの開発サポート">
+<meta property="og:description" content="LP制作・Webサイト開発・業務自動化・LINE BOTまで、生成AIと4年のエンジニア実務経験でスピーディーにお届けします。相談・見積もり無料。">
+<meta property="og:image" content="https://kometa.example.com/ogp.png">
+<meta property="og:url" content="https://kometa.example.com/">
+<meta property="og:site_name" content="コメタ">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="コメタ | 生成AI×エンジニアの開発サポート">
+<meta name="twitter:description" content="LP制作・Webサイト開発・業務自動化・LINE BOTまで、生成AIと4年のエンジニア実務経験でスピーディーにお届けします。相談・見積もり無料。">
+<meta name="twitter:image" content="https://kometa.example.com/ogp.png">
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<!-- Preconnect for Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -86,7 +105,8 @@ nav {
 .stat-num { font-size: 22px; font-weight: 700; color: var(--blue-mid); }
 .stat-label { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
 .hero-card-name { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200); }
-.avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: var(--blue-mid); flex-shrink: 0; }
+.avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: var(--blue-mid); flex-shrink: 0; overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
 .hero-card-name-text { font-size: 15px; font-weight: 700; color: var(--gray-900); }
 .hero-card-name-sub { font-size: 11px; color: var(--gray-500); }
 .skills-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -104,7 +124,8 @@ section { padding: 80px 40px; }
 .profile-sec { background: var(--gray-50); }
 .profile-grid { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start; }
 .profile-left { background: white; border-radius: 16px; padding: 28px; border: 1px solid var(--gray-200); text-align: center; }
-.profile-avatar { width: 88px; height: 88px; border-radius: 50%; background: var(--blue-pale); border: 3px solid var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; color: var(--blue-mid); margin: 0 auto 14px; }
+.profile-avatar { width: 88px; height: 88px; border-radius: 50%; background: var(--blue-pale); border: 3px solid var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; color: var(--blue-mid); margin: 0 auto 14px; overflow: hidden; }
+.profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .profile-name { font-size: 20px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
 .profile-title { font-size: 12px; color: var(--gray-500); margin-bottom: 20px; }
 .profile-stats { display: grid; gap: 10px; }
@@ -247,7 +268,7 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
     </div>
     <div class="hero-card fade-in" style="animation-delay:0.2s">
       <div class="hero-card-name">
-        <div class="avatar">コ</div>
+        <div class="avatar"><img src="profile.png" alt="コメタ"></div>
         <div>
           <div class="hero-card-name-text">コメタ</div>
           <div class="hero-card-name-sub">フリーランスエンジニア / 個人事業主</div>
@@ -279,7 +300,7 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
     <h2 class="section-title fade-in">プロフィール</h2>
     <div class="profile-grid fade-in">
       <div class="profile-left">
-        <div class="profile-avatar">コ</div>
+        <div class="profile-avatar"><img src="profile.png" alt="コメタ"></div>
         <div class="profile-name">コメタ</div>
         <div class="profile-title">フリーランスエンジニア / 個人事業主</div>
         <div class="profile-stats">
@@ -542,7 +563,6 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
       <a href="https://forms.gle/TYQ6gQzatQVmD4EY6" target="_blank" class="btn-white">まずは無料で相談する</a>
       <a href="https://crowdworks.jp/public/employees/4738593?ref=login_header" target="_blank" class="btn-outline-white">クラウドワークスで依頼する</a>
     </div>
-    <p class="cta-note fade-in">※ 「まずは無料で相談する」ボタンはGoogleフォームのURLに変更してください</p>
   </div>
 </section>
 
