@@ -178,13 +178,20 @@ section { padding: 80px 40px; }
 .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 .portfolio-card { background: white; border-radius: 16px; overflow: hidden; border: 1px solid var(--gray-200); transition: box-shadow 0.2s; }
 .portfolio-card:hover { box-shadow: 0 8px 28px rgba(15,52,96,0.1); }
-.portfolio-img { height: 140px; background: linear-gradient(135deg, var(--blue-pale) 0%, #dbeafe 100%); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative; }
-.portfolio-badge { position: absolute; top: 10px; right: 10px; font-size: 10px; background: white; color: var(--gray-500); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--gray-200); }
+.portfolio-img { height: 160px; background: linear-gradient(135deg, var(--blue-pale) 0%, #dbeafe 100%); display: flex; align-items: center; justify-content: center; font-size: 36px; position: relative; overflow: hidden; }
+.portfolio-img img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.portfolio-badge { position: absolute; top: 10px; right: 10px; font-size: 10px; background: white; color: var(--gray-500); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--gray-200); z-index: 1; }
 .portfolio-body { padding: 18px; }
 .portfolio-name { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-bottom: 6px; }
 .portfolio-desc { font-size: 12px; color: var(--gray-500); line-height: 1.7; margin-bottom: 12px; }
-.portfolio-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.portfolio-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
 .pt { font-size: 10px; background: var(--blue-pale); color: var(--blue-dark); padding: 2px 7px; border-radius: 3px; }
+.portfolio-links { display: flex; gap: 8px; }
+.portfolio-link { font-size: 11px; font-weight: 500; padding: 5px 12px; border-radius: 6px; text-decoration: none; transition: all 0.2s; }
+.portfolio-link.github { background: var(--gray-900); color: white; }
+.portfolio-link.github:hover { background: #374151; }
+.portfolio-link.demo { background: var(--blue-pale); color: var(--blue-mid); border: 1px solid var(--blue-light); }
+.portfolio-link.demo:hover { background: #dbeafe; }
 
 /* PRICING */
 .pricing-table { width: 100%; border-collapse: collapse; border-radius: 14px; overflow: hidden; border: 1px solid var(--gray-200); margin-bottom: 20px; }
@@ -455,27 +462,31 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
     <p class="section-sub fade-in">生成AI開発スクールでの制作物を中心に掲載しています。受注案件が増え次第、随時更新していきます。</p>
     <div class="portfolio-grid">
       <div class="portfolio-card fade-in">
-        <div class="portfolio-img">🧩<span class="portfolio-badge">スクール制作</span></div>
+        <div class="portfolio-img">
+          <img src="work-chrome.png" alt="X Post Aggregation Chrome拡張機能">
+          <span class="portfolio-badge">スクール制作</span>
+        </div>
         <div class="portfolio-body">
-          <div class="portfolio-name">Chrome拡張機能 × API連携 × データ分析</div>
-          <div class="portfolio-desc">Chromeブラウザ上で動作する拡張機能を開発。外部APIと連携してデータを取得・分析し、ブラウザ上に可視化する仕組みを実装しました。</div>
-          <div class="portfolio-tags"><span class="pt">JavaScript</span><span class="pt">Chrome API</span><span class="pt">REST API</span><span class="pt">生成AI活用</span></div>
+          <div class="portfolio-name">Chrome拡張機能 ― X投稿をSlack・Notionに自動保存</div>
+          <div class="portfolio-desc">X（Twitter）の投稿をワンクリックでSlackとNotionに同時保存できるChrome拡張機能。Slack Incoming Webhooks・Notion APIと連携し、投稿本文・投稿者・日時・URLを自動記録します。</div>
+          <div class="portfolio-tags"><span class="pt">JavaScript</span><span class="pt">Chrome API</span><span class="pt">Slack API</span><span class="pt">Notion API</span><span class="pt">生成AI活用</span></div>
+          <div class="portfolio-links">
+            <a href="https://github.com/kometa-tech/X-Post-Aggregation" target="_blank" class="portfolio-link github">GitHub</a>
+          </div>
         </div>
       </div>
       <div class="portfolio-card fade-in">
-        <div class="portfolio-img">🤖<span class="portfolio-badge">スクール制作</span></div>
-        <div class="portfolio-body">
-          <div class="portfolio-name">LINE BOT ― 自動応答・業務効率化ツール</div>
-          <div class="portfolio-desc">LINE Messaging APIを使ったチャットBOTを開発。ユーザーのメッセージに自動応答し、業務効率化・顧客対応の自動化を実現しました。</div>
-          <div class="portfolio-tags"><span class="pt">LINE API</span><span class="pt">Python</span><span class="pt">Webhook</span><span class="pt">生成AI活用</span></div>
+        <div class="portfolio-img">
+          <img src="work-linebot.png" alt="LINE BOT 天気通知">
+          <span class="portfolio-badge">スクール制作</span>
         </div>
-      </div>
-      <div class="portfolio-card fade-in">
-        <div class="portfolio-img">📊<span class="portfolio-badge">スクール制作</span></div>
         <div class="portfolio-body">
-          <div class="portfolio-name">GAS ― スプレッドシート・業務自動化</div>
-          <div class="portfolio-desc">Google Apps Scriptを使ったスプレッドシート自動化ツールを開発。データの自動集計・メール送信・定期実行などを実装しました。</div>
-          <div class="portfolio-tags"><span class="pt">GAS</span><span class="pt">Google Sheets</span><span class="pt">Gmail API</span><span class="pt">生成AI活用</span></div>
+          <div class="portfolio-name">LINE BOT × GAS ― 天気予報通知ボット</div>
+          <div class="portfolio-desc">Google Apps Scriptで天気予報APIを取得し、LINEとSlackへ毎朝自動通知するボット。今日の天気・週間予報に対応し、GASトリガーで定期実行します。</div>
+          <div class="portfolio-tags"><span class="pt">GAS</span><span class="pt">LINE Messaging API</span><span class="pt">Slack API</span><span class="pt">天気API</span><span class="pt">生成AI活用</span></div>
+          <div class="portfolio-links">
+            <a href="https://github.com/kometa-tech/LINE-BOT-WeatherNotification-" target="_blank" class="portfolio-link github">GitHub</a>
+          </div>
         </div>
       </div>
       <div class="portfolio-card fade-in">
