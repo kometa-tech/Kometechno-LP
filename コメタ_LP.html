@@ -54,6 +54,9 @@ nav {
 }
 .nav-logo { font-size: 18px; font-weight: 700; color: var(--blue-dark); letter-spacing: -0.02em; }
 .nav-logo span { color: var(--blue-accent); }
+.nav-links { display: flex; gap: 28px; }
+.nav-links a { font-size: 13px; color: var(--gray-700); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--blue-mid); }
 .nav-cta {
   background: var(--blue-mid); color: white; font-size: 13px; font-weight: 500;
   padding: 8px 20px; border-radius: 8px; text-decoration: none; transition: background 0.2s;
@@ -104,6 +107,14 @@ nav {
 .stat { text-align: center; }
 .stat-num { font-size: 22px; font-weight: 700; color: var(--blue-mid); }
 .stat-label { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+.hero-stats-mobile { display: none; margin-top: 24px; background: white; border-radius: 12px; border: 1px solid var(--gray-200); padding: 16px 0; }
+.hero-stats-mobile .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+.hero-stats-mobile .stat { border-right: 1px solid var(--gray-200); }
+.hero-stats-mobile .stat:last-child { border-right: none; }
+.scroll-indicator { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; text-decoration: none; }
+.scroll-indicator-text { font-size: 10px; color: var(--gray-400); letter-spacing: 0.08em; text-transform: uppercase; }
+.scroll-indicator-arrow { width: 18px; height: 18px; border-right: 2px solid var(--gray-400); border-bottom: 2px solid var(--gray-400); transform: rotate(45deg); animation: scrollBounce 1.5s ease infinite; }
+@keyframes scrollBounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
 .hero-card-name { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--gray-200); }
 .avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; color: var(--blue-mid); flex-shrink: 0; overflow: hidden; }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
@@ -224,12 +235,30 @@ section { padding: 80px 40px; }
 .cta-card { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 14px; padding: 20px; text-align: center; }
 .cta-card-num { font-size: 24px; font-weight: 700; color: white; margin-bottom: 4px; }
 .cta-card-label { font-size: 12px; color: rgba(255,255,255,0.7); }
-.cta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
 .btn-white { background: white; color: var(--blue-mid); font-size: 15px; font-weight: 700; padding: 16px 36px; border-radius: 12px; text-decoration: none; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
 .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
 .btn-outline-white { background: transparent; color: white; font-size: 15px; font-weight: 500; padding: 15px 36px; border-radius: 12px; text-decoration: none; border: 2px solid rgba(255,255,255,0.5); transition: all 0.2s; }
 .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: white; }
-.cta-note { text-align: center; margin-top: 20px; font-size: 12px; color: rgba(255,255,255,0.55); }
+/* CONTACT FORM */
+.contact-form-wrap { background: white; border-radius: 20px; padding: 36px 40px; max-width: 600px; margin: 0 auto 28px; text-align: left; }
+.form-row { margin-bottom: 18px; }
+.form-row label { display: block; font-size: 12px; font-weight: 600; color: var(--gray-700); margin-bottom: 6px; }
+.form-row label span { color: #e53e3e; margin-left: 3px; }
+.form-row input, .form-row select, .form-row textarea {
+  width: 100%; padding: 11px 14px; border: 1.5px solid var(--gray-200); border-radius: 8px;
+  font-size: 14px; color: var(--gray-900); font-family: inherit; background: white;
+  transition: border-color 0.2s; box-sizing: border-box;
+}
+.form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--blue-mid); }
+.form-row textarea { resize: vertical; min-height: 100px; }
+.form-submit { width: 100%; padding: 14px; background: var(--blue-mid); color: white; font-size: 15px; font-weight: 700; border: none; border-radius: 10px; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+.form-submit:hover { background: var(--blue-dark); transform: translateY(-1px); }
+.form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.form-msg { display: none; padding: 14px 18px; border-radius: 10px; font-size: 13px; font-weight: 500; margin-bottom: 16px; }
+.form-msg.success { background: #ecfdf5; color: #065f46; border: 1px solid #6ee7b7; display: block; }
+.form-msg.error { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; display: block; }
+.contact-alt { text-align: center; font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
+.contact-alt-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
 
 /* FOOTER */
 footer { background: var(--gray-900); color: rgba(255,255,255,0.5); padding: 28px 40px; text-align: center; font-size: 12px; }
@@ -238,13 +267,17 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
 /* RESPONSIVE */
 @media (max-width: 768px) {
   nav { padding: 14px 20px; }
+  .nav-links { display: none; }
   section { padding: 60px 20px; }
   .hero { padding: 90px 20px 50px; }
   .hero-inner { grid-template-columns: 1fr; gap: 36px; }
   .hero-card { display: none; }
+  .hero-stats-mobile { display: block; }
+  .scroll-indicator { display: none; }
   .profile-grid { grid-template-columns: 1fr; }
   .reasons-grid { grid-template-columns: 1fr; }
-  .cta-cards { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .cta-cards { grid-template-columns: 1fr; gap: 10px; }
+  .contact-form-wrap { padding: 24px 20px; }
   .pricing-table { font-size: 12px; }
   .pricing-table th, .pricing-table td { padding: 10px 12px; }
 }
@@ -258,6 +291,12 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
 
 <nav>
   <div class="nav-logo">コメタ<span>.</span></div>
+  <div class="nav-links">
+    <a href="#services">サービス</a>
+    <a href="#portfolio">実績</a>
+    <a href="#pricing">料金</a>
+    <a href="#faq">FAQ</a>
+  </div>
   <a href="#contact" class="nav-cta">無料で相談する</a>
 </nav>
 
@@ -272,8 +311,15 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
         <a href="#contact" class="btn-primary">まずは無料で相談する</a>
         <a href="https://crowdworks.jp" target="_blank" class="btn-secondary">クラウドワークスで依頼する</a>
       </div>
+      <div class="hero-stats-mobile">
+        <div class="hero-stats">
+          <div class="stat"><div class="stat-num">4年+</div><div class="stat-label">IT実務経験</div></div>
+          <div class="stat"><div class="stat-num">即日</div><div class="stat-label">着手可能</div></div>
+          <div class="stat"><div class="stat-num">24h</div><div class="stat-label">返信目安</div></div>
+        </div>
+      </div>
     </div>
-    <div class="hero-card fade-in" style="animation-delay:0.2s">
+    <div class="hero-card fade-in" style="transition-delay:0.2s">
       <div class="hero-card-name">
         <div class="avatar"><img src="profile.png" alt="コメタ"></div>
         <div>
@@ -293,11 +339,15 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
       </div>
       <div class="hero-stats">
         <div class="stat"><div class="stat-num">4年+</div><div class="stat-label">IT実務経験</div></div>
-        <div class="stat"><div class="stat-num">20h</div><div class="stat-label">週最大稼働</div></div>
+        <div class="stat"><div class="stat-num">即日</div><div class="stat-label">着手可能</div></div>
         <div class="stat"><div class="stat-num">24h</div><div class="stat-label">返信目安</div></div>
       </div>
     </div>
   </div>
+  <a href="#profile" class="scroll-indicator">
+    <span class="scroll-indicator-text">Scroll</span>
+    <span class="scroll-indicator-arrow"></span>
+  </a>
 </section>
 
 <!-- PROFILE -->
@@ -312,7 +362,7 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
         <div class="profile-title">フリーランスエンジニア / 個人事業主</div>
         <div class="profile-stats">
           <div class="profile-stat"><span class="profile-stat-label">IT実務経験</span><span class="profile-stat-val">4年+</span></div>
-          <div class="profile-stat"><span class="profile-stat-label">週最大稼働</span><span class="profile-stat-val">20時間</span></div>
+          <div class="profile-stat"><span class="profile-stat-label">稼働開始</span><span class="profile-stat-val">即日着手可能</span></div>
           <div class="profile-stat"><span class="profile-stat-label">返信スピード</span><span class="profile-stat-val">24時間以内</span></div>
           <div class="profile-stat"><span class="profile-stat-label">開業</span><span class="profile-stat-val">2026年2月</span></div>
         </div>
@@ -507,6 +557,7 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
     <div class="section-label fade-in">Pricing</div>
     <h2 class="section-title fade-in">料金・納期の目安</h2>
     <p class="section-sub fade-in">すべて税込・要件によって変動します。まずはお気軽にご相談ください。</p>
+    <div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
     <table class="pricing-table fade-in">
       <tr><th>サービス</th><th>料金目安</th><th>納期目安</th></tr>
       <tr><td><strong>LP制作</strong><br><span style="font-size:11px;color:#64748b;">デザイン・コーディング一式</span></td><td class="price-val">5〜20万円</td><td>7〜21日</td></tr>
@@ -516,6 +567,7 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
       <tr><td><strong>Chrome拡張・API連携</strong><br><span style="font-size:11px;color:#64748b;">ブラウザ拡張・データ連携</span></td><td class="price-val">5〜20万円</td><td>14〜28日</td></tr>
       <tr><td><strong>その他・複合案件</strong><br><span style="font-size:11px;color:#64748b;">要件をお聞きして対応可否を確認</span></td><td class="price-val">要相談</td><td>要相談</td></tr>
     </table>
+    </div>
     <div class="pricing-notes fade-in">
       <div class="pricing-note">上記はあくまで目安です。要件の規模・複雑さによって変動します。まずはヒアリングのうえ、正式なお見積もりをご提示します。</div>
       <div class="pricing-note">修正対応は各サービスにつき2回まで無料で承ります。それ以上の修正は別途ご相談となります。</div>
@@ -570,8 +622,48 @@ footer span { color: rgba(255,255,255,0.8); font-weight: 500; }
       <div class="cta-card"><div class="cta-card-num">24h</div><div class="cta-card-label">返信スピード</div></div>
       <div class="cta-card"><div class="cta-card-num">契約後</div><div class="cta-card-label">お支払い</div></div>
     </div>
-    <div class="cta-btns fade-in">
-      <a href="https://forms.gle/TYQ6gQzatQVmD4EY6" target="_blank" class="btn-white">まずは無料で相談する</a>
+    <div class="contact-form-wrap fade-in">
+      <div class="form-msg" id="formMsg"></div>
+      <form id="contactForm">
+        <div class="form-row">
+          <label>お名前<span>*</span></label>
+          <input type="text" name="name" placeholder="山田 太郎" required>
+        </div>
+        <div class="form-row">
+          <label>メールアドレス<span>*</span></label>
+          <input type="email" name="email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-row">
+          <label>ご依頼内容<span>*</span></label>
+          <select name="service" required>
+            <option value="" disabled selected>選択してください</option>
+            <option value="LP制作">LP制作</option>
+            <option value="Webサイト開発">Webサイト開発</option>
+            <option value="業務自動化・ツール開発">業務自動化・ツール開発</option>
+            <option value="LINE BOT開発">LINE BOT開発</option>
+            <option value="Chrome拡張・API連携">Chrome拡張・API連携</option>
+            <option value="その他・まずは相談">その他・まずは相談</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>詳細・ご要望</label>
+          <textarea name="message" placeholder="ご要望・現状の課題などをお気軽にお書きください。"></textarea>
+        </div>
+        <div class="form-row">
+          <label>ご予算感（任意）</label>
+          <select name="budget">
+            <option value="" selected>未定 / わからない</option>
+            <option value="〜3万円">〜3万円</option>
+            <option value="3〜10万円">3〜10万円</option>
+            <option value="10〜30万円">10〜30万円</option>
+            <option value="30万円〜">30万円〜</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit" id="formSubmit">無料で相談する（送信）</button>
+      </form>
+    </div>
+    <p class="contact-alt fade-in">またはクラウドワークスからもご依頼いただけます</p>
+    <div class="contact-alt-btns fade-in">
       <a href="https://crowdworks.jp/public/employees/4738593?ref=login_header" target="_blank" class="btn-outline-white">クラウドワークスで依頼する</a>
     </div>
   </div>
@@ -586,6 +678,41 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+const contactForm = document.getElementById('contactForm');
+const formMsg = document.getElementById('formMsg');
+const formSubmit = document.getElementById('formSubmit');
+
+contactForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  formSubmit.disabled = true;
+  formSubmit.textContent = '送信中...';
+  formMsg.className = 'form-msg';
+  formMsg.textContent = '';
+
+  const data = new FormData(contactForm);
+  try {
+    const res = await fetch('https://formspree.io/f/xkoqlqqz', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      formMsg.className = 'form-msg success';
+      formMsg.textContent = 'お問い合わせを受け付けました。24時間以内にご連絡いたします。';
+      contactForm.reset();
+    } else {
+      throw new Error();
+    }
+  } catch {
+    formMsg.className = 'form-msg error';
+    formMsg.textContent = '送信に失敗しました。お手数ですが、しばらくしてから再度お試しください。';
+  } finally {
+    formSubmit.disabled = false;
+    formSubmit.textContent = '無料で相談する（送信）';
+    formMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+});
 </script>
 </body>
 </html>
